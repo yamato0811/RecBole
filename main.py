@@ -60,7 +60,7 @@ if __name__ == '__main__':
     
     # model training and evaluation
     test_score, test_result = trainer.fit(
-        train_data, test_data, saved=True, show_progress=config['show_progress']
+        train_data, valid_data, test_data, saved=True, show_progress=config['show_progress']
     )
 
     logger.info(set_color('test result', 'yellow') + f': {test_result}')
