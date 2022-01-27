@@ -1,5 +1,6 @@
 from recbole.config import Config
 from options import get_args
+import os
 
 args = get_args()
 
@@ -20,5 +21,8 @@ def get_config():
         'eval_args' : {'split': {'LS': 'test_only'}, 'order': 'TO', 'mode': 'uni100', 'group_by': 'user'}
     }
 
-    config = Config(model=args.model, dataset=args.dataset, config_dict=config_dict, config_file_list=[f'dataset/{args.dataset}/{args.dataset}.yaml'])
+    if os.path.isfile(f'dataset/{args.dataset}/{args.dataset}.yaml'):
+        config = Config(model=args.model, dataset=args.dataset, config_dict=config_dict, config_file_list=[f'dataset/{args.dataset}/{args.dataset}.yaml'])
+    else:
+        config = Config(model=args.model, dataset=args.dataset, config_dict=config_dict)
     return config
