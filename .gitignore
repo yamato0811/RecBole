@@ -3,7 +3,7 @@ __pycache__/
 
 saved
 
-dataset
+/dataset
 
 log/
 log_tensorboard/
