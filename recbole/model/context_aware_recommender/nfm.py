@@ -56,7 +56,7 @@ class NFM(ContextRecommender):
 
         output = self.predict_layer(self.mlp_layers(bn_nfm_all_embeddings)) + self.first_order_linear(interaction)
         output = self.sigmoid(output)
-        return output.squeeze(-1)
+        return output.squeeze()
 
     def calculate_loss(self, interaction):
         label = interaction[self.LABEL]

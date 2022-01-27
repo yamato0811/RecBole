@@ -4,9 +4,9 @@
 # @Email  : cx.tian@outlook.com
 
 # UPDATE:
-# @Time   : 2020/9/16, 2021/12/22
-# @Author : Shanlei Mu, Gaowei Zhang
-# @Email  : slmu@ruc.edu.cn, 1462034631@qq.com
+# @Time   : 2020/9/16
+# @Author : Shanlei Mu
+# @Email  : slmu@ruc.edu.cn
 
 r"""
 LightGCN
@@ -51,7 +51,6 @@ class LightGCN(GeneralRecommender):
         self.latent_dim = config['embedding_size']  # int type:the embedding size of lightGCN
         self.n_layers = config['n_layers']  # int type:the layer num of lightGCN
         self.reg_weight = config['reg_weight']  # float32 type: the weight decay for l2 normalization
-        self.require_pow = config['require_pow']
 
         # define layers and loss
         self.user_embedding = torch.nn.Embedding(num_embeddings=self.n_users, embedding_dim=self.latent_dim)
@@ -153,8 +152,7 @@ class LightGCN(GeneralRecommender):
         pos_ego_embeddings = self.item_embedding(pos_item)
         neg_ego_embeddings = self.item_embedding(neg_item)
 
-        reg_loss = self.reg_loss(u_ego_embeddings, pos_ego_embeddings, neg_ego_embeddings, require_pow=self.require_pow)
-
+        reg_loss = self.reg_loss(u_ego_embeddings, pos_ego_embeddings, neg_ego_embeddings)
         loss = mf_loss + self.reg_weight * reg_loss
 
         return loss

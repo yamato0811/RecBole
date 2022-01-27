@@ -71,9 +71,8 @@ def init_logger(config):
     LOGROOT = './log/'
     dir_name = os.path.dirname(LOGROOT)
     ensure_dir(dir_name)
-    model_name = os.path.join(dir_name, config['model'])
-    ensure_dir(model_name)
-    logfilename = '{}/{}.log'.format(config['model'], get_local_time())
+
+    logfilename = '{}-{}.log'.format(config['model'], get_local_time())
 
     logfilepath = os.path.join(LOGROOT, logfilename)
 

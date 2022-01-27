@@ -43,7 +43,7 @@ class LR(ContextRecommender):
 
     def forward(self, interaction):
         output = self.sigmoid(self.first_order_linear(interaction))
-        return output.squeeze(-1)
+        return output.squeeze()
 
     def calculate_loss(self, interaction):
         label = interaction[self.LABEL]

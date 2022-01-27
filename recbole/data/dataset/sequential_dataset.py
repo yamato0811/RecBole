@@ -46,7 +46,7 @@ class SequentialDataset(Dataset):
         if self.config['benchmark_filename'] is not None:
             return
         self.logger.debug('Augmentation for sequential recommendation.')
-        self.data_augmentation() 
+        self.data_augmentation()
 
     def _aug_presets(self):
         list_suffix = self.config['LIST_SUFFIX']
