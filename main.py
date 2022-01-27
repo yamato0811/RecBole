@@ -12,6 +12,7 @@ if __name__ == '__main__':
     args = get_args()
     
     config = get_config()
+    init_seed(config['seed'], config['reproducibility'])
 
     # logger initialization
     init_logger(config)
@@ -35,9 +36,12 @@ if __name__ == '__main__':
     # trainer loading and initialization
     trainer = get_trainer(config['MODEL_TYPE'], config['model'])(config, model)
     
-    # model training and evaluation
-    test_score, test_result = trainer.fit(
-        train_data, valid_data, test_data, saved=True, show_progress=config['show_progress']
+    # model training
+    best_valid_score, best_valid_result = trainer.fit(
+        train_data, valid_data, saved=True, show_progress=config['show_progress']
     )
+
+    # model evaluation
+    test_result = trainer.evaluate(test_data, load_best_model=True, show_progress=config['show_progress'])
 
     logger.info(set_color('test result', 'yellow') + f': {test_result}')
